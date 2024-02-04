@@ -123,6 +123,7 @@ extern "C" void app_main(void)
     mooncake.installApp(new APPS::AppSetWiFi_Packer);
     mooncake.installApp(new APPS::AppTextEditor_Packer);
     mooncake.installApp(new APPS::AppI2C_Packer);
+    mooncake.installApp(new APPS::AppHA_Packer);
 
     // Create launcher
     mooncake.createApp(launcher);

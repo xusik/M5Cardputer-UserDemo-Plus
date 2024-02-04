@@ -20,3 +20,5 @@
 #include "app_radio/app_radio.h"
 #include "app_texteditor/app_texteditor.h"
 #include "app_i2c_scan/app_i2c_scan.h"
+#include "app_ha_connect/app_ha_connect.h"
+
