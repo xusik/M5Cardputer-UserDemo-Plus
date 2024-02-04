@@ -15,6 +15,8 @@
 #include "../utils/anim/anim_define.h"
 #include "../utils/icon/icon_define.h"
 
+#include "lib/PubSubClient.h"
+
 #include "assets/ha_big.h"
 #include "assets/ha_small.h"
 
@@ -36,6 +38,7 @@ namespace MOONCAKE
                 {
                     HAL::Hal* hal = nullptr;
                     State_t current_state = state_init;
+                    PubSubClient client;
                     int64_t _last_update = 0;
                 };
                 Data_t _data;

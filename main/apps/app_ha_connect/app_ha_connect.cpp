@@ -45,7 +45,8 @@ void AppHA::onResume()
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-  spdlog::info("message arrived");
+    spdlog::info("message arrived");
+
 }
 
 void AppHA::onRunning()
@@ -62,20 +63,20 @@ void AppHA::onRunning()
         _canvas->setCursor(0, 0);
         _canvas->printf("WiFi connected");
         _canvas_update();
-        // Add your MQTT Broker IP address, example:
-;
+
         const char* mqtt_server = "192.168.31.193";
 
         WiFiClient espClient;
-        PubSubClient client(mqtt_server, 1883, callback, espClient);
-        long lastMsg = 0;
-        char msg[50];
-        int value = 0;
+        _data.client.setServer(mqtt_server, 1883);
+        _data.client.setClient(espClient);
+        _data.client.setCallback(callback);
 
-        if (client.connect(mqtt_server, "rr", "rr")) {
-                client.publish("outTopic","hello world");
-                client.subscribe("inTopic");
+        if (_data.client.connect("cardputer", "rr", "rr")) {
+                _data.client.publish("cardputerOutTopic","start MQTT");
+                _data.client.subscribe("cardputerInTopic");
         }
+
+        _data.current_state = state_connected;
 
     }else{
 
@@ -87,15 +88,39 @@ void AppHA::onRunning()
         _canvas->setCursor(0, 0);
         _canvas->printf("WiFi not connected");
         _canvas_update();
+
+        _data.current_state = state_init;
     }
-        spdlog::info("init");
-
-
-
 
     } else if (_data.current_state == state_connected) {
 
-        spdlog::info("connected");
+        if (_data.client.connected()){
+            
+            _canvas_clear();
+            _canvas->setBaseColor(THEME_COLOR_BG);
+            _canvas->setTextColor(THEME_COLOR_REPL_TEXT, THEME_COLOR_BG);
+            _canvas->setFont(FONT_REPL);
+            _canvas->setTextSize(FONT_SIZE_REPL);
+            _canvas->setCursor(0, 0);
+            _canvas->printf("MQTT broker connected");
+            _canvas_update();
+            _data.client.publish("cardputerOutTopic","Connected");
+        
+            // _data.client.publish("cardputerOutTopic","state connected");
+        }else{
+            _canvas_clear();
+            _canvas->setBaseColor(THEME_COLOR_BG);
+            _canvas->setTextColor(THEME_COLOR_REPL_TEXT, THEME_COLOR_BG);
+            _canvas->setFont(FONT_REPL);
+            _canvas->setTextSize(FONT_SIZE_REPL);
+            _canvas->setCursor(0, 0);
+            _canvas->printf("MQTT broker not connected");
+            _canvas_update();
+            if (_data.client.connect("cardputer", "rr", "rr")) {
+                _data.client.publish("cardputerOutTopic","Connected again");
+                _data.client.subscribe("cardputerInTopic");
+        }
+        }
 
     }
 
