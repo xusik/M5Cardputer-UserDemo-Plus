@@ -1,11 +1,11 @@
 /**
- * @file app_env.cpp
- * @author Forairaaaaa
+ * @file i2c_scan.cpp
+ * @author xusik
  * @brief
  * @version 0.6
- * @date 2023-09-20
+ * @date 2024-02-04
  *
- * @copyright Copyright (c) 2023
+ * @copyright Copyright (c) 2024
  *
  */
 #include <Arduino.h>

@@ -1,9 +1,9 @@
 /**
- * @file app_env.h
- * @author Wu23333
+ * @file i2c_scan.h
+ * @author xusik
  * @brief
- * @version 0.1
- * @date 2024-01-09
+ * @version 0.6
+ * @date 2024-02-04
  *
  * @copyright Copyright (c) 2023
  *
