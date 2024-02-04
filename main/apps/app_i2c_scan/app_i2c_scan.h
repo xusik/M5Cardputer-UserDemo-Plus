@@ -1,5 +1,5 @@
 /**
- * @file app_scales.h
+ * @file app_env.h
  * @author Wu23333
  * @brief
  * @version 0.1
@@ -15,17 +15,15 @@
 #include "../utils/anim/anim_define.h"
 #include "../utils/icon/icon_define.h"
 
-#include "SCALES/UNIT_SCALES.h"
-#include "assets/scales_big.h"
-#include "assets/scales_small.h"
+#include "assets/i2c_big.h"
+#include "assets/i2c_small.h"
 
-#define FILTER_WINDOW_SIZE 256
 
 namespace MOONCAKE
 {
     namespace APPS
     {
-        class AppScales : public APP_BASE
+        class AppI2C : public APP_BASE
         {
             private:
                 enum State_t
@@ -38,11 +36,7 @@ namespace MOONCAKE
                 {
                     HAL::Hal* hal = nullptr;
                     State_t current_state = state_init;
-                    UNIT_SCALES _scales;
                     int64_t _last_update = 0;
-                    float filter_window[FILTER_WINDOW_SIZE];
-                    uint16_t _filter_window_i = 0;
-                    float offset = 0;
                 };
                 Data_t _data;
 
@@ -53,12 +47,12 @@ namespace MOONCAKE
                 void onDestroy() override;
         };
 
-        class AppScales_Packer : public APP_PACKER_BASE
+        class AppI2C_Packer : public APP_PACKER_BASE
         {
-            std::string getAppName() override { return "SCALES"; }
-            void* getAppIcon() override { return (void*)(new AppIcon_t(image_data_scales_big, image_data_scales_small)); }
-            void* newApp() override { return new AppScales; }
-            void deleteApp(void *app) override { delete (AppScales*)app; }
+            std::string getAppName() override { return "I2C Scan"; }
+            void* getAppIcon() override { return (void*)(new AppIcon_t(image_data_i2c_big, image_data_i2c_small)); }
+            void* newApp() override { return new AppI2C; }
+            void deleteApp(void *app) override { delete (AppI2C*)app; }
         };
     }
 }

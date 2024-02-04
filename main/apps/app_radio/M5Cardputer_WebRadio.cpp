@@ -38,6 +38,7 @@
 #define AAC_URL_INDEXS (i == 2)
 #define CN_FONT_URL_INDEXS (i == 0 || i == 7 || i == 8 || i == 9)
 static constexpr const char* station_list[][2] = {
+    {"Galychyna" , "https://stream320.galychyna.fm/WebSite"},
     {"北京文艺广播 FM87.6" , "http://lhttp.qtfm.cn/live/333/64k.mp3"},
     {"shadowfr69 Radio mp3-256k"  , "https://radio.shadowfr69.eu/mp3"},
     {"shadowfr69 Radio aac-192k", "https://radio.shadowfr69.eu/aac"},

@@ -116,8 +116,8 @@ void AppSetWiFi::_update_cursor() {
 }
 
 
-static char _wifi_ssid[50] = "IOTNetwork";
-static char _wifi_password[50] = "fwintheshell";
+static char _wifi_ssid[50] = "ubiqity_odcon";
+static char _wifi_password[50] = "lobster1234";
 
 void AppSetWiFi::_update_state() {
     if (_data.current_state == state_init) {
@@ -191,7 +191,7 @@ void AppSetWiFi::_update_state() {
             // sntp_warp_init();
 
             if (!esp_sntp_enabled()) {
-                setenv("TZ", "CST-8", 1);
+                setenv("TZ", "EET", 1);
                 tzset();
                 esp_sntp_setoperatingmode(ESP_SNTP_OPMODE_POLL);
                 esp_sntp_setservername(0, "pool.ntp.org");
