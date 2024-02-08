@@ -65,6 +65,14 @@ void AppI2C::onRunning()
         int nDevices;
 
         nDevices = 0;
+        _canvas_clear();
+        _canvas->setBaseColor(THEME_COLOR_BG);
+        _canvas->setTextColor(THEME_COLOR_REPL_TEXT, THEME_COLOR_BG);
+        _canvas->setFont(FONT_REPL);
+        _canvas->setTextSize(FONT_SIZE_REPL);
+        _canvas->setCursor(0, 0);
+        _canvas->printf("dev found: "); 
+        _canvas->setTextSize(1);
         for (address = 1; address < 127; address++ )
         {
             // The i2c_scanner uses the return value of
@@ -82,14 +90,7 @@ void AppI2C::onRunning()
             }
             spdlog::info(address);
 
-            _canvas_clear();
-            _canvas->setBaseColor(THEME_COLOR_BG);
-            _canvas->setTextColor(THEME_COLOR_REPL_TEXT, THEME_COLOR_BG);
-            _canvas->setFont(FONT_REPL);
-            _canvas->setTextSize(FONT_SIZE_REPL);
-            _canvas->setCursor(0, 0);
-            _canvas->printf("dev found: ");
-            _canvas->setTextSize(1);
+
             _canvas->printf("%x\n", address);
             _canvas_update();
 

@@ -48,6 +48,13 @@ namespace MOONCAKE
                 void onResume() override;
                 void onRunning() override;
                 void onDestroy() override;
+                void onRunningBG() override;
+                void callback(char* topic, byte* payload, unsigned int length);
+
+                static AppHA& instance() {
+                    static AppHA obj;
+                return obj;
+            }
         };
 
         class AppHA_Packer : public APP_PACKER_BASE
